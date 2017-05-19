@@ -38,10 +38,12 @@ public class MainActivity extends AppCompatActivity implements TextToSpeech.OnIn
     private TextView txtUserSpeechAgain;
     private TextView txtPoint;
 
-    private static int lstIndex=0;
-
+    private static int lstIndex=1;
+    private static boolean isIncrease=true;
     Spinner dropdownTrue,dropdownFalse;
-    private static String[] lstItems = new String[]{"hello from the other side", "you're beautiful", "hello there"};
+    private static String[] lstItems = new String[]{"I won't take but a minute","you're so pretty", "you are very beautiful", "how's it going","you'll have to step on it"
+            ,"cut your coat according to your cloth","birds of a feather flock together","where there's life There's Hope",
+            "a picture is worth a thousand words","you scratch my back and I'll scratch yours"};
     private static String strTrueWord;
     private final int SPEECH_RECOGNITION_CODE_USERSPEECH = 1; // use for speech to text
     private final int SPEECH_RECOGNITION_CODE_USERSPEECHAGAIN = 2;
@@ -108,6 +110,7 @@ public class MainActivity extends AppCompatActivity implements TextToSpeech.OnIn
                 getNext(findViewById(android.R.id.content));
                 hideDetail();
                 txtUserSpeech.setText("");
+                txtPoint.setText("");
             }
         });
         btnPre.setOnClickListener(new View.OnClickListener() {
@@ -116,6 +119,7 @@ public class MainActivity extends AppCompatActivity implements TextToSpeech.OnIn
                 getPre(findViewById(android.R.id.content));
                 hideDetail();
                 txtUserSpeech.setText("");
+                txtPoint.setText("");
             }
         });
         /*btnListen2.setOnClickListener(new View.OnClickListener() {
@@ -461,7 +465,7 @@ public class MainActivity extends AppCompatActivity implements TextToSpeech.OnIn
                                     }
                                     if(flag==false)
                                     {
-                                        for (int u = index; u < Strings.length;u++ )
+                                        for (int u = index+1; u < Strings.length;u++ )
                                         {
                                             strSTrue += " " + Strings[u];
                                         }
@@ -518,13 +522,24 @@ public class MainActivity extends AppCompatActivity implements TextToSpeech.OnIn
     private void getNext(View view)
     {
         if(lstIndex<lstItems.length) {
+            if(isIncrease==false)
+            {
+                isIncrease=true;
+                lstIndex++;
+            }
             txtComputer.setText(lstItems[lstIndex]);
             lstIndex++;
+
         }
     }
     private void getPre(View view)
     {
         if(lstIndex>0) {
+            if(isIncrease==true)
+            {
+                isIncrease=false;
+                lstIndex--;
+            }
             lstIndex--;
             txtComputer.setText(lstItems[lstIndex]);
         }
